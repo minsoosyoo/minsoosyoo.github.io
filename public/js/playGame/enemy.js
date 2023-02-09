@@ -70,7 +70,7 @@ class Enemy {
         else if (this.type === 'Boss') {
             if (frames > 0 && frames % 300 === 0 && this.radius < 210 && this.speed < 4) {
                 this.radius+=10;
-                this.speed+=0.1
+                this.speed+=0.05;
             }
             this.color = "#800000";
             const angle = Math.atan2(player.y-this.y, player.x-this.x);

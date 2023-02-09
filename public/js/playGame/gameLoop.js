@@ -139,7 +139,7 @@ function animate() {
     }
 
     // ENEMY: spawn a Boss
-    if (frames > 0 && frames % 5000 === 0) {
+    if (frames > 0 && frames % 8000 === 0) {
         spawnBoss();
     }
     
