@@ -82,6 +82,10 @@ window.addEventListener('resize', ()=>{
 
 // player shooting skills
 addEventListener('click', (e)=> {
+    if (player.playerPower.list.includes("shots without click") || !playerCanFire) {
+        return;
+    }
+
     const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x);
     const velocity = {
         x: Math.cos(angle),
@@ -151,6 +155,9 @@ addEventListener('mouseup', (e)=>{
         }
         projectiles.push(new Projectile(player.x, player.y, 100, 'red', velocity, "Linear", null, 80, player.playerPower.bulletSpeed, true));
         charging = false;
+        if (!playerCanFire) {
+            playerCanFire = true;
+        }
         if (!machineGunCDStarted) {
             machineGunUseable = true;
         }
@@ -162,6 +169,9 @@ addEventListener('mouseup', (e)=>{
     } else if (player && player.playerPower.list.includes("charge-attack") && charging && chargeAttackUseable && chargeFrames < player.playerPower.chargeDuration) {
         chargeAttackFired = false;
         charging = false;
+        if (!playerCanFire) {
+            playerCanFire = true;
+        }
         if (!machineGunCDStarted) {
             machineGunUseable = true;
         }
@@ -236,6 +246,7 @@ addEventListener('keydown', function(e) {
         case '1':
             if (player.playerPower.list.includes("machine-gun") && machineGunUseable && !machineGunEnabled && !machineGunCDStarted && !gamePaused) {
                 machineGunEnabled = true;
+                console.log("machineGunEnabled", machineGunEnabled);
                 machineGunText.style.color = "white";
                 machineGunCDStarted = true;
                 machineGunCD();
@@ -244,7 +255,11 @@ addEventListener('keydown', function(e) {
 
                 setTimeout(()=> {
                     machineGunEnabled = false;
+                    console.log("machineGunEnabled", machineGunEnabled);
                     machineGunUseable = false;
+                    if (!playerCanFire) {
+                        playerCanFire = true;
+                    }
                     if (!chargeAttackCDStarted) {
                         chargeAttackUseable = true;
                     }
@@ -270,6 +285,9 @@ addEventListener('keydown', function(e) {
                 setTimeout(()=>{
                     laserBeamEnabled = false;
                     laserBeamUseable = false;
+                    if (!playerCanFire) {
+                        playerCanFire = true;
+                    }
                     if (!chargeAttackCDStarted) {
                         chargeAttackUseable = true;
                     }

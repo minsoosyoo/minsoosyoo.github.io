@@ -21,8 +21,8 @@ class Player {
             chargeDuration: 200, // max 5            upgrade -3 (5)
             chargeReload: 40000, // max 15000  
             turretCharge: 5, // increase turret charge +3     
-            list: ["player-movement"] 
-            //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, automatic
+            list: ["player-movement", "shots without click", "machine-gun", "laser-beam", "charge-attack"] 
+            //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, shots without click
         }; 
         this.shieldPower = {
             damage: 5, // max 10

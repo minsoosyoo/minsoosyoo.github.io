@@ -142,9 +142,57 @@ function animate() {
     if (frames > 0 && frames % 2000 === 0) {
         spawnBoss();
     }
+
+    // PLAYER POWER: shots without click
+    if (player.playerPower.list.includes("shots without click") && playerCanFire) {
+        const angle = Math.atan2(mouse.position.y - player.y, mouse.position.x - player.x);
+        const velocity = {
+            x: Math.cos(angle),
+            y: Math.sin(angle)
+        }
+        if (frames % 8 === 0) {
+            if (player && player.playerPower.list.includes("shot-gun")) {
+                // first shot
+                projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+                // second shot
+                const angleTwo = angle + 0.2;
+                const velocityTwo = {
+                    x: Math.cos(angleTwo),
+                    y: Math.sin(angleTwo)
+                }
+                projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityTwo, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+                // third shot
+                const angleThree = angle - 0.2;
+                const velocityThree = {
+                    x: Math.cos(angleThree),
+                    y: Math.sin(angleThree)
+                }
+                projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityThree, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+                if (player && player.playerPower.list.includes("improved-shot-gun")) {
+                    // fourth shot
+                    const angleFour = angle + 0.4;
+                    const velocityFour = {
+                        x: Math.cos(angleFour),
+                        y: Math.sin(angleFour)
+                    }
+                    projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFour, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+                    // fifth shot
+                    const angleFive = angle - 0.4;
+                    const velocityFive = {
+                        x: Math.cos(angleFive),
+                        y: Math.sin(angleFive)
+                    }
+                    projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFive, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+                }
+            } else {
+                projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+            }  
+        }
+    }
     
     // PLAYER POWER: machine gun
     if (machineGunEnabled && player.playerPower.list.includes("machine-gun")) {
+        playerCanFire = false;
         console.log("machine gun firing");
         
         player.color = "yellow";
@@ -161,6 +209,7 @@ function animate() {
 
     // PLAYER POWER: laser beam
     if (laserBeamEnabled && player.playerPower.list.includes("laser-beam")) {
+        playerCanFire = false;
         console.log("laser beam firing");
         
         player.color = "orange";
@@ -177,6 +226,7 @@ function animate() {
 
     // PLAYER POWER: charge attack
     if (player.playerPower.list.includes("charge-attack") && charging && chargeAttackUseable) {
+        playerCanFire = false;
         chargeFrames++;
         laserBeamUseable = false;
         machineGunUseable = false;

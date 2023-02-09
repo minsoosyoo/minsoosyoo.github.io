@@ -27,7 +27,8 @@ class PowerUpClass {
         "machine-gun",  
         "charge-attack", 
         "laser-beam",
-        "improved-shot-gun"]
+        "improved-shot-gun",
+        "shots without click"]
 
         this.shieldPower = ["shield-center", 
         "shield-stationary",

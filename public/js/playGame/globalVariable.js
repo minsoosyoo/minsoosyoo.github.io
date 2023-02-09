@@ -83,6 +83,7 @@ let shiftPressed = false;
 let chosenPower;
 let powerUpAvailable = true;
 let powerUpDropped = false;
+let playerCanFire = true;
 let machineGunEnabled = false;
 let machineGunUseable = true;
 let laserBeamEnabled = false;
@@ -169,6 +170,8 @@ function resetTalent() {
     powerUpAvailable = true;
     powerUpDropped = false;
 
+    // player shots without click
+    playerCanFire = true;
     // nuclear bomb
     nuclearBombEnabled = false;
     // machine gun
