@@ -85,48 +85,49 @@ addEventListener('click', (e)=> {
     if (player.playerPower.list.includes("shots without click") || !playerCanFire) {
         return;
     }
-
-    const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x);
-    const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
-    }
-    if (player && player.playerPower.list.includes("shot-gun")) {
-        // first shot
-        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-        // second shot
-        const angleTwo = angle + 0.2;
-        const velocityTwo = {
-            x: Math.cos(angleTwo),
-            y: Math.sin(angleTwo)
-        }
-        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityTwo, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-        // third shot
-        const angleThree = angle - 0.2;
-        const velocityThree = {
-            x: Math.cos(angleThree),
-            y: Math.sin(angleThree)
-        }
-        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityThree, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-        if (player && player.playerPower.list.includes("improved-shot-gun")) {
-            // fourth shot
-            const angleFour = angle + 0.4;
-            const velocityFour = {
-                x: Math.cos(angleFour),
-                y: Math.sin(angleFour)
-            }
-            projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFour, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-            // fifth shot
-            const angleFive = angle - 0.4;
-            const velocityFive = {
-                x: Math.cos(angleFive),
-                y: Math.sin(angleFive)
-            }
-            projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFive, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-        }
-    } else {
-        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    }   
+    
+    playerFire();
+    // const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x);
+    // const velocity = {
+    //     x: Math.cos(angle),
+    //     y: Math.sin(angle)
+    // }
+    // if (player && player.playerPower.list.includes("shot-gun")) {
+    //     // first shot
+    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    //     // second shot
+    //     const angleTwo = angle + 0.2;
+    //     const velocityTwo = {
+    //         x: Math.cos(angleTwo),
+    //         y: Math.sin(angleTwo)
+    //     }
+    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityTwo, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    //     // third shot
+    //     const angleThree = angle - 0.2;
+    //     const velocityThree = {
+    //         x: Math.cos(angleThree),
+    //         y: Math.sin(angleThree)
+    //     }
+    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityThree, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    //     if (player && player.playerPower.list.includes("improved-shot-gun")) {
+    //         // fourth shot
+    //         const angleFour = angle + 0.4;
+    //         const velocityFour = {
+    //             x: Math.cos(angleFour),
+    //             y: Math.sin(angleFour)
+    //         }
+    //         projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFour, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    //         // fifth shot
+    //         const angleFive = angle - 0.4;
+    //         const velocityFive = {
+    //             x: Math.cos(angleFive),
+    //             y: Math.sin(angleFive)
+    //         }
+    //         projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFive, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    //     }
+    // } else {
+    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    // }   
 })
 
 addEventListener('mousemove', (e)=>{

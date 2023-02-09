@@ -21,7 +21,7 @@ class Player {
             chargeDuration: 200, // max 5            upgrade -3 (5)
             chargeReload: 40000, // max 15000  
             turretCharge: 5, // increase turret charge +3     
-            list: ["player-movement", "shots without click", "machine-gun", "laser-beam", "charge-attack"] 
+            list: ["player-movement"] 
             //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, shots without click
         }; 
         this.shieldPower = {
@@ -72,4 +72,48 @@ class Player {
             this.velocity.y = 0;
         }
     }
+}
+
+function playerFire() {
+    const angle = Math.atan2(mouse.position.y - player.y, mouse.position.x - player.x);
+    const velocity = {
+        x: Math.cos(angle),
+        y: Math.sin(angle)
+    }
+    if (player && player.playerPower.list.includes("shot-gun")) {
+        // first shot
+        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+        // second shot
+        const angleTwo = angle + 0.2;
+        const velocityTwo = {
+            x: Math.cos(angleTwo),
+            y: Math.sin(angleTwo)
+        }
+        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityTwo, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+        // third shot
+        const angleThree = angle - 0.2;
+        const velocityThree = {
+            x: Math.cos(angleThree),
+            y: Math.sin(angleThree)
+        }
+        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityThree, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+        if (player && player.playerPower.list.includes("improved-shot-gun")) {
+            // fourth shot
+            const angleFour = angle + 0.4;
+            const velocityFour = {
+                x: Math.cos(angleFour),
+                y: Math.sin(angleFour)
+            }
+            projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFour, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+            // fifth shot
+            const angleFive = angle - 0.4;
+            const velocityFive = {
+                x: Math.cos(angleFive),
+                y: Math.sin(angleFive)
+            }
+            projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFive, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+        }
+    } else {
+        projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
+    }  
 }
