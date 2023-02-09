@@ -155,6 +155,10 @@ function init() {
     chargeAttackCDText.innerHTML = "N/A";
     nuclearBombCDText.innerHTML = "N/A";
     turretsChargeText.innerHTML = player.playerPower.turretCharge;
+    machineGunText.style.color = "white";
+    laserBeamText.style.color = "white";
+    chargeAttackText.style.color = "white";
+    nuclearBombText.style.color = "white";
     shiftPressed = false;
 }
 
