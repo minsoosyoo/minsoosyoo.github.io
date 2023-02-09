@@ -155,7 +155,7 @@ function animate() {
             y: Math.sin(angle)*5
         }
         if (frames % 4 === 0) {
-            projectiles.push(new Projectile(player.x, player.y, 5, "yellow", velocity, "Linear", null, player.playerPower.damage+3, player.playerPower.bulletSpeed, false));
+            projectiles.push(new Projectile(player.x, player.y, 5, "yellow", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed, false));
         }
     }
 
@@ -171,7 +171,7 @@ function animate() {
             y: Math.sin(angle)*0.8
         }
         if (frames % 2 === 0) {
-            projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage-1, player.playerPower.bulletSpeed + 5, true));
+            projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed + 5, true));
         }
     }
 
