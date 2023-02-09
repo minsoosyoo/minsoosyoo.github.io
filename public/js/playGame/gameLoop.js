@@ -126,8 +126,8 @@ function animate() {
         }
     }
     // ENEMY: enemy speed increase over time
-    if (frames > 0 && frames % 10000 === 0 && enemySpeedincrease < 1.1) {
-        enemySpeedincrease+=0.1;
+    if (frames > 0 && frames % 10000 === 0 && enemySpeedIncrease < 1.1) {
+        enemySpeedIncrease+=0.1;
     }
     // ENEMY: enemy types increase over time
     if (frames > 0 && frames % 5000 === 0 && numEnemyTypes < 4) {
