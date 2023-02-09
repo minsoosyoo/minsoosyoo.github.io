@@ -29,11 +29,6 @@ class Enemy {
     update() {
         this.draw();
 
-        // if (frames > 100000 && this.speed < 2.5 && frames % 500 === 0) {
-        //     this.speed += 0.01;
-        // }
-        
-        // spinning
         if (this.type === 'Spinning') {
             this.radians += 0.1;
 
@@ -113,8 +108,6 @@ function spawnEnemies(spawnRate) {
         let dice = Math.floor(Math.random()*numEnemyTypes);
         let enemyType = enemyTypes[dice];
 
-        console.log("enemy type", enemyType);
-
         enemies.push(new Enemy(x, y, radius, color, velocity, speed, enemyType));
     }
     , spawnRate);
@@ -138,6 +131,5 @@ function spawnBoss() {
         y: Math.sin(angle)
     }
     let speed = 1 + enemySpeedIncrease;  
-    enemies.push(new Enemy(x, y, radius, color, velocity, speed, "Homing"));
     enemies.push(new Enemy(x, y, 100, color, velocity, speed, "Boss"));
 }
