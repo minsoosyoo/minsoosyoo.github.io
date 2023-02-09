@@ -8,6 +8,7 @@ function endGame() {
     clearInterval(chargeAttackCDId);
     clearInterval(nuclearBombCDId);
     restartModal.style.display = "block";
+    skillTree.style.display = "none";
     gsap.fromTo('.restart-modal', {
         scale: 0.8,
         opacity: 0
