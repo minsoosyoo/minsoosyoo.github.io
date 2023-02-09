@@ -8,16 +8,16 @@ document.addEventListener('visibilitychange', ()=> {
         clearInterval(laserBeamCDId);
         clearInterval(chargeAttackCDId);
         clearInterval(nuclearBombCDId);
-    } else {
-        gamePaused = false;
-        spawnEnemies(spawnRate);
-        animate();
-        machineGunCD();
-        laserBeamCD();
-        chargeAttackCD();
-        nuclearBombCD();
-    }
-})
+    } else if (gamePaused && pauseModal.style.display === "none") {
+            gamePaused = false;
+            spawnEnemies(spawnRate);
+            animate();
+            machineGunCD();
+            laserBeamCD();
+            chargeAttackCD();
+            nuclearBombCD();
+    }    
+});
 
 // pause modal
 pause.addEventListener("click", ()=>{
