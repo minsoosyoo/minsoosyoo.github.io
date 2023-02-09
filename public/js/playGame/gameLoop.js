@@ -179,6 +179,19 @@ function animate() {
         chargeFrames++;
         laserBeamUseable = false;
         machineGunUseable = false;
+        if (chargeFrames > 0 && chargeFrames < 40) {
+            player.color = "#FEF001";
+        } else if (chargeFrames >= 40 && chargeFrames < 80) {
+            player.color = "#FFCE03";
+        } else if (chargeFrames >= 80 && chargeFrames < 120) {
+            player.color = "#FD9A01";
+        } else if (chargeFrames >= 120 && chargeFrames < 160) {
+            player.color = "#FD6104";
+        } else if (chargeFrames >= 160 && chargeFrames < 200) {
+            player.color = "#FF2C05";
+        } else if (chargeFrames >= 200) {
+            player.color = "red";
+        }
     }
 
     // UPDATE: particle explosion
