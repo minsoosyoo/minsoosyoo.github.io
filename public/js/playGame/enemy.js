@@ -29,9 +29,9 @@ class Enemy {
     update() {
         this.draw();
 
-        if (frames > 100000 && this.speed < 2.5&& frames % 500 === 0) {
-            this.speed += 0.01;
-        }
+        // if (frames > 100000 && this.speed < 2.5 && frames % 500 === 0) {
+        //     this.speed += 0.01;
+        // }
         
         // spinning
         if (this.type === 'Spinning') {
@@ -93,8 +93,7 @@ function spawnEnemies(spawnRate) {
         if (gamePaused) {
             clearInterval(enemyIntervalId);
         }
-
-        let radius = Math.random() * (enemyRadiusMax - 10) + 10;
+        let radius = Math.floor(Math.random() * (enemyRadiusMax - 10) + 10);
         let x;
         let y;
         if (Math.random() < 0.5) {
@@ -122,7 +121,7 @@ function spawnEnemies(spawnRate) {
 }
 
 function spawnBoss() {
-    let radius = Math.random() * (enemyRadiusMax - 10) + 10;
+    let radius = Math.floor(Math.random() * (enemyRadiusMax - 10) + 10);
     let x;
     let y;
     if (Math.random() < 0.5) {

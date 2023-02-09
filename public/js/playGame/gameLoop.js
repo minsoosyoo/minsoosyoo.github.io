@@ -126,7 +126,7 @@ function animate() {
         }
     }
     // ENEMY: enemy speed increase over time
-    if (frames > 0 && frames % 20000 === 0 && enemySpeedincrease < 2.2) {
+    if (frames > 0 && frames % 10000 === 0 && enemySpeedincrease < 1.1) {
         enemySpeedincrease+=0.1;
     }
     // ENEMY: enemy types increase over time
@@ -139,7 +139,7 @@ function animate() {
     }
 
     // ENEMY: spawn a Boss
-    if (frames > 0 && frames % 8000 === 0) {
+    if (frames > 0 && frames % 2000 === 0) {
         spawnBoss();
     }
     
