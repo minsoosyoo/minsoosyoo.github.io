@@ -28,7 +28,7 @@ const start = document.querySelector("#start");
 const pause = document.querySelector("#pause");
 const pauseModal = document.querySelector(".pause-modal");
 const pauseModalScore = document.querySelector(".pause-score");
-const continueGame = document.querySelector("#continue");
+const continueBtn = document.querySelector("#continue");
 
 // player power list
 let machineGunText = document.querySelector(".machine-gun");
@@ -66,18 +66,16 @@ let particles = [];
 let shields = [];
 let turrets = []; 
 let powerUps = [];
-let frames = 0;
+
+let frames;
 let animationId;
 let enemyIntervalId;
-let spawnRate = 1000;
-let powerUpDropChance = 0.5
-let score = 0;
-let mousedown = false;
-let gamePaused = false;
-let chargeColor;
+let spawnRate;
+let chargeFrames;
 
-//shift
-let shiftPressed = false;
+let powerUpDropChance;
+let score;
+let gamePaused = false;
 
 // player-power
 let chosenPower;
@@ -126,31 +124,36 @@ let justPoweredUp = false;
 // reset function
 function init() {
     console.log("New Game");
+    
     const x = canvas.width / 2;
     const y = canvas.height / 2;
     player = new Player(x, y, 30, 'white');
+
     enemies = [];
     enemyTypes = ["Linear", "Homing", "Spinning", "Homing Spinning", "Boss"];
     numEnemyTypes = 1;
     enemyRadiusMax = 30;
     enemySpeedIncrease = 0
+
     projectiles = [];
     autoProjectiles = [];
     particles = [];
     shields = [];
     turrets = [];
     powerUps = [];
+
     frames = 0;
     animationId;
     enemyIntervalId;
     chargeFrames = 0;
     spawnRate = 1000;
+    
     powerUpDropChance = 0.2;
+    
     score = 0;
     scoreText.innerHTML = `${score}`;
-    mousedown = false;
+    
     gamePaused = false;
-    chargeColor = "white";
     machineGunCDText.innerHTML = "N/A";
     laserBeamCDText.innerHTML = "N/A";
     chargeAttackCDText.innerHTML = "N/A";
@@ -160,7 +163,6 @@ function init() {
     laserBeamText.style.color = "white";
     chargeAttackText.style.color = "white";
     nuclearBombText.style.color = "white";
-    shiftPressed = false;
 }
 
 // clear all power ups
@@ -172,18 +174,23 @@ function resetTalent() {
 
     // player shots without click
     playerCanFire = true;
+
     // nuclear bomb
     nuclearBombEnabled = false;
+    
     // machine gun
     machineGunEnabled = false;
     machineGunUseable = true;
+    
     // laser beam
     laserBeamEnabled = false;
     laserBeamUseable = true;
+    
     // charge attack
     chargeAttackUseable = true;
     chargeAttackFired=false;
     charging = false;
+    
     // turrets
     shieldTurretActivated = false;
     autoTurretActivated = false;
@@ -209,7 +216,6 @@ function resetTalent() {
     powerUpOne = null;
     powerUpTwo = null;
     powerUpThree = null;
-
     canPowerUp = true;
     justPoweredUp = false;
 }

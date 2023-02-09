@@ -14,6 +14,7 @@ class Player {
             movespeed: 0.5, // max 1     upgrade + 0.1 (5)
             bulletSpeed: 5, // max 8      upgrade +1 (3)
             bulletSize: 4, // max 8       upgrade +1 (3)
+            reload: 20, // max 8       upgrade -2 (6)
             machineGunDuration: 2500, // max 4000      upgrade +500 (5)   
             machineGunReload: 15000, // max 10000     upgrade -1000 (5)
             laserBeamDuration: 1000, // max 3000
@@ -21,7 +22,7 @@ class Player {
             chargeDuration: 200, // max 5            upgrade -3 (5)
             chargeReload: 40000, // max 15000  
             turretCharge: 5, // increase turret charge +3     
-            list: ["player-movement"] 
+            list: ["player-movement", "shots without click"] 
             //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, shots without click
         }; 
         this.shieldPower = {

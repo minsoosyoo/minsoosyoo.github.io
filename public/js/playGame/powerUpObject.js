@@ -4,6 +4,7 @@ class PowerUpClass {
         {playerPower: {movespeed: 0.1}, num: 5, message: "movement speed increased"}, 
         {playerPower: {bulletSpeed: 1}, num: 3, message: "bullets travel faster"}, 
         {playerPower: {bulletSize: 1}, num: 3, message: "bullet size increased"}, 
+        {playerPower: {reload: -2}, num: 6, message: "your bullets fire more frequently"},
         {playerPower: {machineGunDuration: 500}, num: 5, message: "machine gun lasts +0.5 seconds"},
         {playerPower: {machineGunReload: -1000}, num: 5, message: "machine gun cooldown -1 second"}, 
         {playerPower: {laserBeamDuration: 1000}, num: 3, message: "laser beam lasts +0.5 seconds"}, 
@@ -27,8 +28,7 @@ class PowerUpClass {
         "machine-gun",  
         "charge-attack", 
         "laser-beam",
-        "improved-shot-gun",
-        "shots without click"]
+        "improved-shot-gun"]
 
         this.shieldPower = ["shield-center", 
         "shield-stationary",

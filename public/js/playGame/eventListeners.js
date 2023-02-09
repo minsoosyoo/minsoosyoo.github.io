@@ -2,30 +2,18 @@
 document.addEventListener('visibilitychange', ()=> {
     if (document.hidden) {
         gamePaused = true;
-        cancelAnimationFrame(animationId);
-        clearInterval(enemyIntervalId);
-        clearInterval(machineGunCDId);
-        clearInterval(laserBeamCDId);
-        clearInterval(chargeAttackCDId);
-        clearInterval(nuclearBombCDId);
     } else if (gamePaused && pauseModal.style.display === "none") {
-            gamePaused = false;
-            spawnEnemies(spawnRate);
-            animate();
-            machineGunCD();
-            laserBeamCD();
-            chargeAttackCD();
-            nuclearBombCD();
+        continueGame();
     }    
 });
 
 // pause modal
 pause.addEventListener("click", ()=>{
-    pauseGame();
+    gamedPaused = true;
 })
 
-continueGame.addEventListener("click", ()=> {
-    continueState();
+continueBtn.addEventListener("click", ()=> {
+    continueGame();
     gsap.to('.pause-modal', {
         opacity: 0,
         scale: 0.8,
@@ -85,49 +73,8 @@ addEventListener('click', (e)=> {
     if (player.playerPower.list.includes("shots without click") || !playerCanFire) {
         return;
     }
-    
+
     playerFire();
-    // const angle = Math.atan2(e.clientY - player.y, e.clientX - player.x);
-    // const velocity = {
-    //     x: Math.cos(angle),
-    //     y: Math.sin(angle)
-    // }
-    // if (player && player.playerPower.list.includes("shot-gun")) {
-    //     // first shot
-    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    //     // second shot
-    //     const angleTwo = angle + 0.2;
-    //     const velocityTwo = {
-    //         x: Math.cos(angleTwo),
-    //         y: Math.sin(angleTwo)
-    //     }
-    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityTwo, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    //     // third shot
-    //     const angleThree = angle - 0.2;
-    //     const velocityThree = {
-    //         x: Math.cos(angleThree),
-    //         y: Math.sin(angleThree)
-    //     }
-    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityThree, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    //     if (player && player.playerPower.list.includes("improved-shot-gun")) {
-    //         // fourth shot
-    //         const angleFour = angle + 0.4;
-    //         const velocityFour = {
-    //             x: Math.cos(angleFour),
-    //             y: Math.sin(angleFour)
-    //         }
-    //         projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFour, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    //         // fifth shot
-    //         const angleFive = angle - 0.4;
-    //         const velocityFive = {
-    //             x: Math.cos(angleFive),
-    //             y: Math.sin(angleFive)
-    //         }
-    //         projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocityFive, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    //     }
-    // } else {
-    //     projectiles.push(new Projectile(player.x, player.y, player.playerPower.bulletSize, 'white', velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed, false));
-    // }   
 })
 
 addEventListener('mousemove', (e)=>{
@@ -142,7 +89,6 @@ addEventListener('mousedown', ()=>{
     }
 })
 
-let chargeFrames=0;
 addEventListener('mouseup', (e)=>{
     if (player && player.playerPower.list.includes("charge-attack") && charging && chargeAttackUseable && chargeFrames >= player.playerPower.chargeDuration) {
         chargeAttackText.style.color = "white";
@@ -202,15 +148,15 @@ addEventListener('keydown', function(e) {
                     for (let i=0; i<Math.floor(enemy.radius/2); i++) {
                         particles.push(new Particle(enemy.x, enemy.y, Math.random() * 2, enemy.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
                     }
-                    if (enemy.radius < 30) {
+                    if (enemy.radius <= 100) {
                         // increase score
-                        score += Math.floor(enemy.radius % 10) * 100 + 100;
+                        score += 200;
                         scoreText.innerHTML = score;                
                         enemies.splice(index, 1);
-                    } else {
+                    } else if (enemy.radius > 100){
                         score += 200;
                         scoreText.innerHTML = score;   
-                        enemy.radius =- 20 
+                        enemy.radius = Math.floor(enemy.radius/2); 
                     }
                 }
                 nuclearBombEnabled = true;

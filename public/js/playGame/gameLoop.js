@@ -20,7 +20,7 @@ function endGame() {
     modalScore.innerHTML = score;
 }
 
-function continueState() {
+function continueGame(){
     if (gamePaused) {
         console.log("game continuing");
         gamePaused = false;
@@ -50,7 +50,7 @@ function pauseGame() {
         opacity: 1,
         ease: 'expo'
     })
-    pauseModalScore.innerHTML = score;
+    pauseModalScore.innerHTML = score;  
 }
 
 // main game loop
@@ -145,7 +145,7 @@ function animate() {
 
     // PLAYER POWER: shots without click
     if (player.playerPower.list.includes("shots without click") && playerCanFire) {
-        if (frames % 8 === 0) {
+        if (frames % player.playerPower.reload === 0) {
             playerFire();
         }
     }
