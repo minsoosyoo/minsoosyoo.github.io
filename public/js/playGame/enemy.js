@@ -68,7 +68,7 @@ class Enemy {
         }
         // boss
         else if (this.type === 'Boss') {
-            if (frames > 0 && frames % 200 === 0 && this.radius < 210 && this.speed < 4) {
+            if (frames > 0 && frames % 300 === 0 && this.radius < 210 && this.speed < 4) {
                 this.radius+=10;
                 this.speed+=0.1
             }

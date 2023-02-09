@@ -130,7 +130,7 @@ function animate() {
         enemySpeedincrease+=0.1;
     }
     // ENEMY: enemy types increase over time
-    if (frames > 0 && frames % 3000 === 0 && numEnemyTypes < 4) {
+    if (frames > 0 && frames % 5000 === 0 && numEnemyTypes < 4) {
         console.log("frames: ", frames)
         numEnemyTypes++;
     }
@@ -139,7 +139,7 @@ function animate() {
     }
 
     // ENEMY: spawn a Boss
-    if (frames > 0 && frames % 2000 === 0) {
+    if (frames > 0 && frames % 5000 === 0) {
         spawnBoss();
     }
     
