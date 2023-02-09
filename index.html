@@ -1,13 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Github Pages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="./public/css/playGame.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script defer src="./public/js/playGame/globalVariable.js"></script>
+    <script defer src="./public/js/playGame/powerUpObject.js"></script>
+    <script defer src="./public/js/playGame/player.js"></script>
+    <script defer src="./public/js/playGame/enemy.js"></script>
+    <script defer src="./public/js/playGame/powerUp.js"></script>
+    <script defer src="./public/js/playGame/coolDown.js"></script>
+    <script defer src="./public/js/playGame/turret.js"></script>
+    <script defer src="./public/js/playGame/particles.js"></script>
+    <script defer src="./public/js/playGame/projectiles.js"></script>
+    <script defer src="./public/js/playGame/shield.js"></script>
+    <script defer src="./public/js/playGame/eventListeners.js"></script>
+    <script defer src="./public/js/playGame/gameLoop.js"></script>
+    <title>Defend Your Ball</title>
 </head>
+
 <body>
-    <h1>My Profile Page</h1>
-    <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam quisquam fuga culpa aliquam repellendus, minus voluptatum nesciunt! Esse inventore velit modi quibusdam quia quae, et culpa rem natus soluta, fuga illo perferendis quisquam eligendi necessitatibus? Quo optio perspiciatis architecto cum ratione aliquam voluptatibus quas, minima eum cupiditate similique laboriosam nulla.</p>
+    <div class="score"><span>Score:</span><span id="score-number">0</span></div>
+    <button id="pause"> Pause (P) </button>
+    <div class="pause-modal">
+        <h3 class="game-paused">Game Paused</h3>
+        <h1 class="pause-score">0</h1>
+        <p>Points</p>
+        <button class="modal-button" id="continue">Continue Game</button>
+    </div>
+    
+    <div class="restart-modal">
+        <h3 class="game-over">Game Over</h3>
+        <h1 class="modal-score">0</h1>
+        <p>Points</p>
+        <button class="modal-button" id="restart">Restart Game</button>
+    </div>
+
+    <div class="start-modal">
+        <h1 class="game-title">Gong-Nim - Ball Defense</h1>
+        <button class="modal-button" id="start">Start</button>
+    </div>
+
+    <div class="skill-tree-modal">
+        <p class="power-up-message">You exceeded 0 Points!</p>
+        <div class="power-up-container">
+            <div class="power-one power-up">
+                Power 1
+            </div>
+            <div class="power-two power-up">
+                Power 2
+            </div>
+            <div class="power-three power-up">
+                Power 3
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="player-powers">
+        <p class="machine-gun">Machine Gun (1): <span id="machine-gun-cd">N/A</span></p>
+        <p class="laser-beam">Laser Beam (2): <span id="laser-beam-cd">N/A</span></p>
+        <p class="charge-attack">Charge Attack (Hold Right Mouse-Click): <span id="charge-attack-cd">N/A</span></p>
+        <p class="nuclear-bomb">Nuclear Bomb (Enter): <span id="nuclear-bomb-cd">N/A</span></p>
+        <p class="turrets">Turret Charges (3-shield, 4-auto): <span id="turret-charges-count">5</span></p>
+    </div>
+
+    <canvas></canvas>
 </body>
+
 </html>
