@@ -35,7 +35,7 @@ class PowerUpClass {
         "shield-turret",
         "shield-both-dir"];
 
-        this.autoPower = ["auto",
+        this.autoPower = ["auto-missiles",
         "auto-turret",
         "nuclear-bomb",
         "homing-auto"]
@@ -177,7 +177,7 @@ function chooseShield(powerUpObject) {
 
 function chooseAuto(powerUpObject) {
     let choice = {};
-    if (powerUpObject.autoPower[0] === "auto") {
+    if (powerUpObject.autoPower[0] === "auto-missiles") {
         choice = {
             type: "auto",
             power: powerUpObject.autoPower[0],

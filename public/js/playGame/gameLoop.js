@@ -326,7 +326,7 @@ function animate() {
         }
 
         // fire auto projectiles
-        if (player.autoPower.list.includes("auto") && frames % player.autoPower.reload === 0) {
+        if (player.autoPower.list.includes("auto-missiles") && frames % player.autoPower.reload === 0) {
             console.log("frames", frames);
             spawnAutoProjectiles(player, enemy, player.autoPower.count, "Linear");
         } else if (player.autoPower.list.includes("homing-auto") && frames % player.autoPower.reload === 0) {

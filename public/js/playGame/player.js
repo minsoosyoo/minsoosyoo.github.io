@@ -43,7 +43,7 @@ class Player {
             reload: 500, // max: 200
             turretSize: 10, // max: 20
             list: [] 
-            //auto, homing-auto, auto-turrets, nuclear-bomb
+            //auto-missiles, homing-auto, auto-turrets, nuclear-bomb
         };
     }
 
