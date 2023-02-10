@@ -142,9 +142,7 @@ addEventListener('keydown', function(e) {
         // clear the board power up
         case 'Enter':
             if (player.autoPower.list.includes("nuclear-bomb") && !nuclearBombEnabled && !nuclearBombCDStarted) {
-                explodeAudio.volume = 1;
                 explodeAudio.play();
-                explodeAudio.volume = 0.008;
                 nuclearBombText.style.color = "white";
                 nuclearBombCDStarted = true;
                 nuclearBombCD();
