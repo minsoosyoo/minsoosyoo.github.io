@@ -150,11 +150,27 @@ addEventListener('keydown', function(e) {
                     }
                     if (enemy.radius <= 100) {
                         // increase score
-                        score += 200;
+                        createScoreLabel({
+                            position: {
+                                x: enemy.x,
+                                y: enemy.y
+                            },
+                            score: 100,
+                            color: "pink"
+                        });
+                        score += 100;
                         scoreText.innerHTML = score;                
                         enemies.splice(index, 1);
                     } else if (enemy.radius > 100){
-                        score += 200;
+                        createScoreLabel({
+                            position: {
+                                x: enemy.x,
+                                y: enemy.y
+                            },
+                            score: 50,
+                            color: "white"
+                        });
+                        score += 50;
                         scoreText.innerHTML = score;   
                         enemy.radius = Math.floor(enemy.radius/2); 
                     }

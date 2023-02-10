@@ -133,3 +133,23 @@ function spawnBoss() {
     let speed = 1 + enemySpeedIncrease;  
     enemies.push(new Enemy(x, y, 100, color, velocity, speed, "Boss"));
 }
+
+function createScoreLabel({position, score, color}) {
+    const scoreLabel = document.createElement('label');
+    scoreLabel.innerHTML = score;
+    scoreLabel.style.color = color;
+    scoreLabel.style.position = 'absolute';
+    scoreLabel.style.left = position.x + 'px';
+    scoreLabel.style.top = position.y + 'px';
+    scoreLabel.style.userSelect = 'none';
+    document.body.appendChild(scoreLabel);
+
+    gsap.to(scoreLabel, {
+        opacity: 0,
+        y: -30,
+        duration: 0.75,
+        onComplete: ()=>{
+            scoreLabel.parentNode.removeChild(scoreLabel);
+        }
+    })
+}

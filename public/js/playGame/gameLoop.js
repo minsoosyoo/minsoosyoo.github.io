@@ -108,6 +108,14 @@ function animate(fps) {
             const dist = Math.hypot(player.x-powerUp.position.x, player.y-powerUp.position.y);
             if (dist < powerUp.image.height/2 + player.radius && !justPoweredUp) {
                 justPoweredUp = true;
+                createScoreLabel({
+                    position: {
+                        x: player.x,
+                        y: player.y
+                    },
+                    score: "Powered Up",
+                    color: "yellow"
+                });
                 powerUps.splice(i, 1);
                 powerUpMessage.innerHTML = `You Hit Lightning in a Bottle!`;
                 choosePowerUp();
@@ -279,7 +287,6 @@ function animate(fps) {
                     particles.push(new Particle(player.x, player.y, Math.random() * 2, player.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
                 }
                 if (player.radius > 10) {
-                    console.log("you got hit!");
                     gsap.to(player, {
                         radius: player.radius - 2
                     });
@@ -305,6 +312,14 @@ function animate(fps) {
                             projectile.didDamage = true;
                         }, 500);
                         score += 100;
+                        createScoreLabel({
+                            position: {
+                                x: projectile.x,
+                                y: projectile.y
+                            },
+                            score: 100,
+                            color: "white"
+                            });
                         scoreText.innerHTML = score;
                         gsap.to(enemy, {
                             radius: enemy.radius - projectile.damage
@@ -314,6 +329,14 @@ function animate(fps) {
                         }
                     } else {
                         // increase score
+                        createScoreLabel({
+                            position: {
+                                x: projectile.x,
+                                y: projectile.y
+                            },
+                            score: 200,
+                            color: "yellow"
+                        });
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
@@ -359,6 +382,14 @@ function animate(fps) {
                     }
                     if (enemy.radius - projectile.damage > 5) {
                         // increase score
+                        createScoreLabel({
+                            position: {
+                                x: projectile.x,
+                                y: projectile.y
+                            },
+                            score: 100,
+                            color: "white"
+                        });
                         score += 100;
                         scoreText.innerHTML = score;
                         gsap.to(enemy, {
@@ -369,6 +400,14 @@ function animate(fps) {
                         // increase score
                         score += 200;
                         scoreText.innerHTML = score;
+                        createScoreLabel({
+                            position: {
+                                x: projectile.x,
+                                y: projectile.y
+                            },
+                            score: 200,
+                            color: "yellow"
+                        });
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
                             spawnPowerUps(enemy);
                             powerUpDropped = true;
@@ -403,6 +442,14 @@ function animate(fps) {
                         if (shield.shieldCharges <= 1) {
                             shields.splice(sIndex, 1);
                         }
+                        createScoreLabel({
+                            position: {
+                                x: shield.x,
+                                y: shield.y
+                            },
+                            score: 100,
+                            color: "white"
+                        });
                         score += 100;
                         scoreText.innerHTML = score;
                         gsap.to(enemy, {
@@ -412,6 +459,14 @@ function animate(fps) {
                         if (shield.shieldCharges <= 1) {
                             shields.splice(sIndex, 1);
                         }
+                        createScoreLabel({
+                            position: {
+                                x: shield.x,
+                                y: shield.y
+                            },
+                            score: 200,
+                            color: "yellow"
+                        });
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
