@@ -88,6 +88,7 @@ function animate(fps) {
 
         player.update();
         if (player.radius < 10) {
+            deathAudio.play();
             for (let i=0; i<player.radius; i++) {
                 particles.push(new Particle(player.x, player.y, Math.random() * 2, player.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
             }
@@ -129,6 +130,7 @@ function animate(fps) {
     
             const dist = Math.hypot(player.x-powerUp.position.x, player.y-powerUp.position.y);
             if (dist < powerUp.image.height/2 + player.radius && !justPoweredUp) {
+                powerUpAudio.play();
                 justPoweredUp = true;
                 createScoreLabel({
                     position: {
@@ -178,6 +180,7 @@ function animate(fps) {
         // PLAYER POWER: shots without click
         if (player.playerPower.list.includes("shots without click") && playerCanFire) {
             if (frames % player.playerPower.reload === 0) {
+                shootAudio.play();
                 playerFire();
             }
         }
@@ -195,6 +198,7 @@ function animate(fps) {
                 y: Math.sin(angle)*5
             }
             if (frames % 4 === 0) {
+                shootAudio.play();
                 projectiles.push(new Projectile(player.x, player.y, 5, "yellow", velocity, "Linear", null, player.playerPower.damage+10, player.playerPower.bulletSpeed, false));
             }
         }
@@ -212,6 +216,7 @@ function animate(fps) {
                 y: Math.sin(angle)*0.8
             }
             if (frames % 2 === 0) {
+                laserAudio.play();
                 projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed + 5, true));
             }
         }
@@ -219,6 +224,9 @@ function animate(fps) {
         // PLAYER POWER: charge attack
         if (player.playerPower.list.includes("charge-attack") && charging && chargeAttackUseable) {
             playerCanFire = false;
+            if (chargeFrames%40===0) {
+                chargingAudio.play()
+            }
             chargeFrames++;
             laserBeamUseable = false;
             machineGunUseable = false;
@@ -291,6 +299,7 @@ function animate(fps) {
             enemy.update();
             if (enemy.radius < 3) {
                 if (Math.random() < powerUpDropChance && !powerUpDropped) {
+                    healAudio.play();
                     spawnPowerUps(enemy);
                     powerUpDropped = true;
                     setTimeout(()=>{
@@ -308,10 +317,12 @@ function animate(fps) {
                     particles.push(new Particle(player.x, player.y, Math.random() * 2, player.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
                 }
                 if (player.radius > 10) {
+                    damageTakenAudio.play();
                     gsap.to(player, {
                         radius: player.radius - 2
                     });
                 } else {
+                    deathAudio.play();
                     endGame();
                 }
             }
@@ -328,6 +339,7 @@ function animate(fps) {
                         }
                     }
                     if (enemy.radius - projectile.damage > 5 && !projectile.didDamage) {
+                        damageTakenAudio.play();
                         // increase score
                         setTimeout(()=>{
                             projectile.didDamage = true;
@@ -361,11 +373,12 @@ function animate(fps) {
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-    
+                            
                             // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
                             // console.log("indexOfPowerUP", indexOfPowerUp);
+                            healAudio.play();
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
@@ -374,6 +387,7 @@ function animate(fps) {
                                 powerUpDropped = false;
                             }, 5000);
                         }
+                        explodeAudio.play();
                         enemies.splice(index, 1);
                         if (!projectile.isALaser) {
                             projectiles.splice(pIndex, 1);
@@ -384,10 +398,10 @@ function animate(fps) {
     
             // fire auto projectiles
             if (player.autoPower.list.includes("auto-missiles") && frames % player.autoPower.reload === 0) {
-                console.log("frames", frames);
+                chargingAudio.play();
                 spawnAutoProjectiles(player, enemy, player.autoPower.count, "Linear");
             } else if (player.autoPower.list.includes("homing-auto") && frames % player.autoPower.reload === 0) {
-                console.log("frames", frames);
+                chargingAudio.play();
                 spawnAutoProjectiles(player, enemy, player.autoPower.count, "Homing");
             }
     
@@ -403,6 +417,7 @@ function animate(fps) {
                     }
                     if (enemy.radius - projectile.damage > 5) {
                         // increase score
+                        damageTakenAudio.play();
                         createScoreLabel({
                             position: {
                                 x: projectile.x,
@@ -431,11 +446,13 @@ function animate(fps) {
                         });
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
                             spawnPowerUps(enemy);
+                            healAudio.play();
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 powerUpDropped = false;
                             }, 10000);
                         }
+                        explodeAudio.play();
                         enemies.splice(index, 1);
                         autoProjectiles.splice(pIndex, 1);
                     }
@@ -460,6 +477,7 @@ function animate(fps) {
                         }
                     }
                     if (shield.gotHit && enemy.radius - shield.damage > 5) {
+                        damageTakenAudio.play();
                         if (shield.shieldCharges <= 1) {
                             shields.splice(sIndex, 1);
                         }
@@ -491,12 +509,14 @@ function animate(fps) {
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
+                            healAudio.play();
                             spawnPowerUps(enemy);
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 powerUpDropped = false;
                             }, 10000);
                         }
+                        explodeAudio.play();
                         enemies.splice(index, 1);
                         shields.splice(sIndex, 1);
                     }
@@ -512,7 +532,7 @@ function animate(fps) {
                         particles.push(new Particle(turret.x, turret.y, Math.random() * 2, turret.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
                     }
                     if (turret.radius > 5) {
-                        console.log("you got hit!");
+                        damageTakenAudio.play();
                         gsap.to(turret, {
                             radius: turret.radius - 2
                         });
@@ -522,12 +542,14 @@ function animate(fps) {
                         score += 10;
                     } else {
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
+                            healAudio.play();
                             spawnPowerUps(enemy);
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 powerUpDropped = false;
                             }, 10000);
                         }
+                        deathAudio.play();
                         enemies.splice(index, 1);
                         turrets.splice(tIndex, 1);
                         score += 20;
