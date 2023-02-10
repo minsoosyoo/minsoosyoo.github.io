@@ -63,6 +63,7 @@ let numEnemyTypes = 1;
 let enemyRadiusMax = 30;
 let enemySpeedIncrease = 0;
 let particles = [];
+let backgroundParticles = [];
 let shields = [];
 let turrets = []; 
 let powerUps = [];
@@ -139,6 +140,22 @@ function init() {
     projectiles = [];
     autoProjectiles = [];
     particles = [];
+    backgroundParticles = [];
+
+    const spacing = 30;
+
+    for (let x=0; x<canvas.width + spacing; x+=spacing) {
+        for (let y=0; y<canvas.height + spacing; y+=spacing){
+            backgroundParticles.push(new BackgroundParticle({
+                position: {
+                    x,
+                    y
+                }, 
+                radius: 2
+            }))
+        }
+    }
+
     shields = [];
     turrets = [];
     powerUps = [];

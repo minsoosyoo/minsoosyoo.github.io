@@ -64,6 +64,28 @@ function animate(fps) {
         c.fillRect(0, 0, canvas.width, canvas.height);
     
         // game end condition
+
+        backgroundParticles.forEach((backgroundParticle) => {
+            backgroundParticle.draw();
+
+            const dist = Math.hypot(
+                player.x - backgroundParticle.position.x, 
+                player.y - backgroundParticle.position.y
+            );
+
+            if (dist < 100) {
+                backgroundParticle.alpha = 0;
+                
+                if (dist > 70) {
+                    backgroundParticle.alpha = 0.5;
+                }
+            } else if (dist > 100 && backgroundParticle.alpha < 0.1) {
+                backgroundParticle.alpha += 0.01;
+            } else if (dist > 100 && backgroundParticle.alpha > 0.1) {
+                backgroundParticle.alpha -= 0.01;
+            }
+        });
+
         player.update();
         if (player.radius < 10) {
             for (let i=0; i<player.radius; i++) {
@@ -142,7 +164,6 @@ function animate(fps) {
         }
         // ENEMY: enemy types increase over time
         if (frames > 0 && frames % 5000 === 0 && numEnemyTypes < 4) {
-            console.log("frames: ", frames)
             numEnemyTypes++;
         }
         if (frames > 100000) {
@@ -174,7 +195,7 @@ function animate(fps) {
                 y: Math.sin(angle)*5
             }
             if (frames % 4 === 0) {
-                projectiles.push(new Projectile(player.x, player.y, 5, "yellow", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed, false));
+                projectiles.push(new Projectile(player.x, player.y, 5, "yellow", velocity, "Linear", null, player.playerPower.damage+10, player.playerPower.bulletSpeed, false));
             }
         }
     
@@ -191,7 +212,7 @@ function animate(fps) {
                 y: Math.sin(angle)*0.8
             }
             if (frames % 2 === 0) {
-                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage, player.playerPower.bulletSpeed + 5, true));
+                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed + 5, true));
             }
         }
     
@@ -310,7 +331,7 @@ function animate(fps) {
                         // increase score
                         setTimeout(()=>{
                             projectile.didDamage = true;
-                        }, 500);
+                        }, 1000);
                         score += 100;
                         createScoreLabel({
                             position: {
