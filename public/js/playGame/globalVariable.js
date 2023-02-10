@@ -67,6 +67,7 @@ let shields = [];
 let turrets = []; 
 let powerUps = [];
 
+let fps;
 let frames;
 let animationId;
 let enemyIntervalId;
@@ -142,6 +143,8 @@ function init() {
     turrets = [];
     powerUps = [];
 
+    // fps
+    fps = 100;
     frames = 0;
     animationId;
     enemyIntervalId;

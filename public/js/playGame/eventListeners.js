@@ -29,7 +29,7 @@ continueBtn.addEventListener("click", ()=> {
 restart.addEventListener("click", ()=>{
     init();
     resetTalent();
-    animate();
+    animate(fps);
     spawnEnemies(spawnRate);
 
     console.log("starting player power: ", player.playerPower.list);
@@ -48,7 +48,7 @@ restart.addEventListener("click", ()=>{
 start.addEventListener("click", ()=>{
     init();
     resetTalent();
-    animate();
+    animate(60);
     spawnEnemies(spawnRate);
     console.log("starting player power: ", player.playerPower.list);
     gsap.to('.start-modal', {
