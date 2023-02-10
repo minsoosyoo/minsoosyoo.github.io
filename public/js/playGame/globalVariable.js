@@ -123,40 +123,6 @@ let powerUpThree;
 let canPowerUp = true;
 let justPoweredUp = false;
 
-// audio
-const shootAudio = new Howl({
-    src: './public/audio/Basic_shoot_noise.wav',
-    volume: 0.008
-});
-const damageTakenAudio = new Howl({
-    src: './public/audio/Damage_taken.wav',
-    volume: 0.1
-})
-const explodeAudio = new Howl({
-    src: './public/audio/Explode.wav',
-    volume: 0.1
-})
-const powerUpAudio = new Howl({
-    src: './public/audio/Powerup_noise.wav',
-    volume: 0.5
-})
-const deathAudio = new Howl({
-    src: './public/audio/Death.wav',
-    volume: 0.5
-})
-const healAudio = new Howl({
-    src: './public/audio/Heal.wav',
-    volume: 0.5
-})
-const laserAudio = new Howl({
-    src: './public/audio/Jump.wav',
-    volume: 0.1
-})
-const chargingAudio = new Howl({
-    src: './public/audio/Select.wav',
-    volume: 0.1
-})
-
 // reset function
 function init() {
     console.log("New Game");
@@ -195,7 +161,7 @@ function init() {
     powerUps = [];
 
     // fps
-    fps = 100;
+    fps = 70;
     frames = 0;
     animationId;
     enemyIntervalId;

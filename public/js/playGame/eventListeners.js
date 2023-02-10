@@ -27,6 +27,9 @@ continueBtn.addEventListener("click", ()=> {
 
 // restart modal
 restart.addEventListener("click", ()=>{
+    if (!backgroundAudio.playing()) {
+        backgroundAudio.play();
+    }
     init();
     resetTalent();
     animate(fps);
@@ -46,6 +49,9 @@ restart.addEventListener("click", ()=>{
 
 // start model
 start.addEventListener("click", ()=>{
+    if (!backgroundAudio.playing()) {
+        backgroundAudio.play();
+    }
     init();
     resetTalent();
     animate(60);

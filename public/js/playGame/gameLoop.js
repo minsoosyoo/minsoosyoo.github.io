@@ -217,7 +217,7 @@ function animate(fps) {
             }
             if (frames % 2 === 0) {
                 laserAudio.play();
-                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed + 5, true));
+                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+8, player.playerPower.bulletSpeed + 5, true));
             }
         }
     
@@ -286,10 +286,13 @@ function animate(fps) {
     
         // UPDATE: fire shield projectiles
         if (player.shieldPower.list.includes("shield-moving") && frames % player.shieldPower.reload === 0) {
+            laserAudio.play();
             spawnShield(player.x, player.y, "shield-moving");
         } else if (player.shieldPower.list.includes("shield-stationary") && frames % player.shieldPower.reload === 0) {
+            laserAudio.play();
             spawnShield(player.x, player.y, "shield-stationary");
         } else if (player.shieldPower.list.includes("shield-center") && frames % player.shieldPower.reload === 0) {
+            laserAudio.play();
             spawnShield(player.x, player.y,"shield-center");
         }
     
@@ -343,7 +346,7 @@ function animate(fps) {
                         // increase score
                         setTimeout(()=>{
                             projectile.didDamage = true;
-                        }, 1000);
+                        }, 1500);
                         score += 100;
                         createScoreLabel({
                             position: {
@@ -398,10 +401,10 @@ function animate(fps) {
     
             // fire auto projectiles
             if (player.autoPower.list.includes("auto-missiles") && frames % player.autoPower.reload === 0) {
-                chargingAudio.play();
+                shootAudio.play();
                 spawnAutoProjectiles(player, enemy, player.autoPower.count, "Linear");
             } else if (player.autoPower.list.includes("homing-auto") && frames % player.autoPower.reload === 0) {
-                chargingAudio.play();
+                shootAudio.play();
                 spawnAutoProjectiles(player, enemy, player.autoPower.count, "Homing");
             }
     
