@@ -320,7 +320,6 @@ function animate(fps) {
                     particles.push(new Particle(player.x, player.y, Math.random() * 2, player.color, {x: (Math.random()-0.5) * (Math.random()*6), y: (Math.random()-0.5) * (Math.random()*6)}));
                 }
                 if (player.radius > 10) {
-                    damageTakenAudio.play();
                     gsap.to(player, {
                         radius: player.radius - 2
                     });

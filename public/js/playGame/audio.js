@@ -36,24 +36,3 @@ const backgroundAudio = new Howl({
     volume: 0.2,
     loop: true
 })
-const backgroundAudioTwo = new Howl({
-    src: './public/audio/Groovy.wav',
-    volume: 0.2
-})
-const backgroundAudioThree = new Howl({
-    src: './public/audio/Jam.wav',
-    volume: 0.2
-})
-const backgroundAudioFour = new Howl({
-    src: './public/audio/Strolling.wav',
-    volume: 0.2
-})
-const backgroundAudioFive = new Howl({
-    src: './public/audio/Poco-Loco.wav',
-    volume: 0.2
-})
-const backgroundAudioSix = new Howl({
-    src: './public/audio/Sad.wav',
-    volume: 0.2,
-    loop: true
-})
