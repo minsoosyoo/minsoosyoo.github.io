@@ -1,28 +1,28 @@
 class PowerUpClass {
     constructor() {
-        this.universal = [{playerPower: {damage: 1}, num: 5, message: "+1 damage per bullet"}, 
+        this.universal = [{playerPower: {damage: 2}, num: 8, message: "+2 damage per bullet"}, 
         {playerPower: {movespeed: 0.1}, num: 5, message: "movement speed increased"}, 
-        {playerPower: {bulletSpeed: 1}, num: 3, message: "bullets travel faster"}, 
-        {playerPower: {bulletSize: 1}, num: 3, message: "bullet size increased"}, 
-        {playerPower: {reload: -2}, num: 6, message: "your bullets fire more frequently"},
+        {playerPower: {bulletSpeed: 1}, num: 5, message: "bullets travel faster"}, 
+        {playerPower: {bulletSize: 1}, num: 5, message: "bullet size increased"}, 
+        {playerPower: {reload: -2}, num: 5, message: "your bullets fire more frequently"},
         {playerPower: {machineGunDuration: 500}, num: 5, message: "machine gun lasts +0.5 seconds"},
         {playerPower: {machineGunReload: -1000}, num: 5, message: "machine gun cooldown -1 second"}, 
-        {playerPower: {laserBeamDuration: 1000}, num: 3, message: "laser beam lasts +0.5 seconds"}, 
+        {playerPower: {laserBeamDuration: 1000}, num: 5, message: "laser beam lasts +0.5 seconds"}, 
         {playerPower: {laserBeamReload: -3000}, num: 5, message: "laser beam cooldown -5 seconds"},
-        {playerPower: {turretCharge: 1}, num: 100, message: "turret charge +1"},
-        {shieldPower: {turretSize: 5}, num: 4, message: "shield turret size increased"},
-        {shieldPower: {damage: 1}, num: 5, message: "shield damage +1"}, 
+        {playerPower: {turretCharge: 3}, num: 100, message: "turret charge +3"},
+        {shieldPower: {turretSize: 5}, num: 10, message: "shield turret size increased"},
+        {shieldPower: {damage: 2}, num: 5, message: "shield damage +2"}, 
         {shieldPower: {speed: 0.02}, num: 5, message: "shield rotates faster"},
-        {shieldPower: {size: 2}, num: 3, message: "shield size increased"},
-        {shieldPower: {reload: -150}, num: 5, message: "shield spawns faster"},
+        {shieldPower: {size: 2}, num: 5, message: "shield size increased"},
+        {shieldPower: {reload: -100}, num: 5, message: "shield spawns faster"},
         {shieldPower: {radianFactor: -20}, num: 5, message: "shield rotation is tighter"},
         {shieldPower: {shieldCharges: 1}, num: 5, message: "shield can hit +1 time extra"},
-        {autoPower: {turretSize: 5}, num: 4, message: "auto turret size increased"},
-        {autoPower: {damage: 1}, num: 5, message: "auto shot damage +1"},
+        {autoPower: {turretSize: 5}, num: 5, message: "auto turret size increased"},
+        {autoPower: {damage: 2}, num: 5, message: "auto shot damage +2"},
         {autoPower: {speed: 1}, num: 5, message: "auto shots travel faster"},
         {autoPower: {size: 1}, num: 5, message: "auto shot bullet size increased"},
-        {autoPower: {count: 2}, num: 4, message: "+2 auto shots are fired"},
-        {autoPower: {reload: -150}, num: 3, message: "auto shots are fired more frequently"}]
+        {autoPower: {count: 2}, num: 5, message: "+2 auto shots are fired"},
+        {autoPower: {reload: -100}, num: 5, message: "auto shots are fired more frequently"}]
 
         this.playerPower = ["shot-gun", 
         "machine-gun",  
@@ -81,6 +81,8 @@ function powerUpSelection(powerUpObject) {
     }
 
     powerUpChoices = [powerOne, powerTwo, powerThree, powerFour];
+    powerUpChoices = powerUpChoices.filter(powerUp => (powerUp !== undefined || powerUp !== null));
+    console.log("power up choices: ", powerUpChoices);
     powerUpChoices = shuffle(powerUpChoices);
     return powerUpChoices;
 }
@@ -93,31 +95,26 @@ function chooseUniversal(powerUpObject) {
         randNumUni = getRandomNumber(powerUpObject.universal.length-1);
         num = powerUpObject.universal[randNumUni].num
 
-        if (num < 1) {
-            powerUpObject.universal.splice(randNumUni, 1);
+        let choiceUni = powerUpObject.universal[randNumUni];
+        let firstKey = Object.keys(choiceUni)[0];
+
+        if ((firstKey === "shieldPower" && powerUpObject.shieldPower.includes("shield-center")) || (firstKey === "auto" && powerUpObject.autoPower.includes("auto"))) {
             chooseUniversal(powerUpObject);
-        } else {
-            let choiceUni = powerUpObject.universal[randNumUni];
-            let firstKey = Object.keys(choiceUni)[0];
-
-            if ((firstKey === "shieldPower" && powerUpObject.shieldPower.includes("shield-center")) || (firstKey === "auto" && powerUpObject.autoPower.includes("auto"))) {
-                chooseUniversal(powerUpObject);
-            }
-
-            let secondKey = Object.keys(Object.values(choiceUni)[0])[0];
-            let powerValue = Object.values(Object.values(choiceUni)[0])[0];
-            let message = powerUpObject.universal[randNumUni].message;
-            let choice = {
-                type: "universal",
-                firstKey: firstKey,
-                secondKey: secondKey,
-                powerValue: powerValue,
-                num: num,
-                message: message,
-                index: randNumUni
-            }
-            return choice;
         }
+
+        let secondKey = Object.keys(Object.values(choiceUni)[0])[0];
+        let powerValue = Object.values(Object.values(choiceUni)[0])[0];
+        let message = powerUpObject.universal[randNumUni].message;
+        let choice = {
+            type: "universal",
+            firstKey: firstKey,
+            secondKey: secondKey,
+            powerValue: powerValue,
+            num: num,
+            message: message,
+            index: randNumUni
+        }
+        return choice;
     } else {
         return null;
     }
@@ -222,6 +219,8 @@ function choosePowerUp() {
         } else {
             powerOne.innerHTML = `${powerUpOne.power}`;
         }
+    } else {
+        powerOne.style.display = "none";
     }
 
     if (powerUpTwo) {
@@ -231,6 +230,8 @@ function choosePowerUp() {
         } else {
             powerTwo.innerHTML = `${powerUpTwo.power}`;
         }
+    } else {
+        powerTwo.style.display = "none";
     }
 
     if (powerUpThree) {
@@ -240,6 +241,8 @@ function choosePowerUp() {
         } else {
             powerThree.innerHTML = `${powerUpThree.power}`;
         }
+    } else {
+        powerTwo.style.display = "none";
     }
 }
 
@@ -250,6 +253,9 @@ function choosePowerOne() {
         player[`${powerUpOne.firstKey}`][`${powerUpOne.secondKey}`] += powerUpOne.powerValue;
         if (powerUpTwo.secondKey === "turretCharge") {
             turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
+        }
+        if (powerUpObject.universal[powerUpOne.index].num < 1) {
+            powerUpObject.universal.splice(powerUpOne.index, 1);
         }
     } else if (powerUpOne.type === "player" ) {
         chosenPower = powerUpOne.power;
@@ -285,10 +291,13 @@ function choosePowerOne() {
 function choosePowerTwo() {
     let chosenPower;
     if (powerUpTwo.type === "universal") {
-        powerUpObject.universal[powerUpTwo.index].num--
+        powerUpObject.universal[powerUpTwo.index].num--;
         player[`${powerUpTwo.firstKey}`][`${powerUpTwo.secondKey}`] += powerUpTwo.powerValue;
         if (powerUpTwo.secondKey === "turretCharge") {
             turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
+        }
+        if (powerUpObject.universal[powerUpTwo.index].num < 1) {
+            powerUpObject.universal.splice(powerUpTwo.index, 1);
         }
     } else if (powerUpTwo.type === "player" ) {
         chosenPower = powerUpTwo.power;
@@ -328,6 +337,9 @@ function choosePowerThree() {
         player[`${powerUpThree.firstKey}`][`${powerUpThree.secondKey}`] += powerUpThree.powerValue;
         if (powerUpOne.secondKey === "turretCharge") {
             turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
+        }
+        if (powerUpObject.universal[powerUpThree.index].num < 1) {
+            powerUpObject.universal.splice(powerUpThree.index, 1);
         }
     } else if (powerUpThree.type === "player" ) {
         chosenPower = powerUpThree.power;

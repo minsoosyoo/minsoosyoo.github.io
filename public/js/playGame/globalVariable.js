@@ -30,6 +30,9 @@ const pauseModal = document.querySelector(".pause-modal");
 const pauseModalScore = document.querySelector(".pause-score");
 const continueBtn = document.querySelector("#continue");
 
+// volume
+const volumeUp = document.querySelector("#volume-up");
+
 // player power list
 let machineGunText = document.querySelector(".machine-gun");
 let machineGunCDText = document.querySelector("#machine-gun-cd");

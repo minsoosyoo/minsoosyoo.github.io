@@ -20,7 +20,7 @@ body {
 }
 
 .player-powers {
-    position: fixed;
+    position: absolute;
     right: 0%;
     /* transform: translateX(-100%); */
     padding: 5px 10px;
@@ -52,6 +52,17 @@ body {
     border: none;
     border-radius: 5px;
     color: white;
+    cursor: pointer;
+}
+
+.sound {
+    position: fixed;
+    top: 0%;
+    left: 7%;
+    color: white;
+    width: 20px;
+    height: 20px;
+    padding: 8px;
     cursor: pointer;
 }
 

@@ -26,10 +26,10 @@ class Player {
             //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, shots without click
         }; 
         this.shieldPower = {
-            damage: 5, // max 10
+            damage: 10, // max 10
             speed: 0.02, // max 0.1
             size: 3, // max 9
-            reload: 1000, // max 300
+            reload: 600, // max 300
             radianFactor: 200, // max 100
             shieldCharges: 1, // max: 5
             turretSize: 10, // max: 20
@@ -37,11 +37,11 @@ class Player {
             //shield-center, shield-stationary, shield-moving, shield-turret, shield-extra, shield-both-dir
         }; 
         this.autoPower = {
-            damage: 5, // max 10
+            damage: 10, // max 10
             speed: 5, // max 10
             size: 3, // size 8
             count: 2, // max 8
-            reload: 500, // max: 200
+            reload: 600, // max: 200
             turretSize: 10, // max: 20
             list: [] 
             //auto-missiles, homing-auto, auto-turrets, nuclear-bomb

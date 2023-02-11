@@ -9,7 +9,11 @@ document.addEventListener('visibilitychange', ()=> {
 
 // pause modal
 pause.addEventListener("click", ()=>{
-    gamedPaused = true;
+    console.log("game paused");
+    if (!gamePaused) {
+        gamePaused = true;
+        console.log("game paused", gamePaused);
+    }
 })
 
 continueBtn.addEventListener("click", ()=> {
@@ -28,7 +32,7 @@ continueBtn.addEventListener("click", ()=> {
 // restart modal
 restart.addEventListener("click", ()=>{
     if (!backgroundAudio.playing()) {
-        backgroundAudio.play();
+        setTimeout(()=>{backgroundAudio.play()}, 1000); 
     }
     init();
     resetTalent();
@@ -50,7 +54,7 @@ restart.addEventListener("click", ()=>{
 // start model
 start.addEventListener("click", ()=>{
     if (!backgroundAudio.playing()) {
-        backgroundAudio.play();
+        setTimeout(()=>{backgroundAudio.play()}, 1000); 
     }
     init();
     resetTalent();
