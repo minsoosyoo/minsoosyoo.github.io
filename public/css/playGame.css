@@ -57,13 +57,21 @@ body {
 
 .sound {
     position: fixed;
-    top: 0%;
-    left: 7%;
+    top: 5%;
+    left: 0%;
     color: white;
     width: 20px;
     height: 20px;
     padding: 8px;
     cursor: pointer;
+}
+
+.sound > svg {
+    position: absolute;
+}
+
+#volume-off {
+    display: none;
 }
 
 .pause-score {

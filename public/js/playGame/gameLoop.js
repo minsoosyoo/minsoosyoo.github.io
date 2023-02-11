@@ -164,6 +164,7 @@ function animate(fps) {
         if (frames > 0 && frames % 10000 === 0 && enemySpeedIncrease < 1.1) {
             enemySpeedIncrease+=0.1;
         }
+        
         // ENEMY: enemy types increase over time
         if (frames > 0 && frames % 5000 === 0 && numEnemyTypes < 4) {
             numEnemyTypes++;
@@ -217,7 +218,7 @@ function animate(fps) {
             }
             if (frames % 2 === 0) {
                 laserAudio.play();
-                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+8, player.playerPower.bulletSpeed + 5, true));
+                projectiles.push(new Projectile(player.x, player.y, 5, "orange", velocity, "Linear", null, player.playerPower.damage+5, player.playerPower.bulletSpeed+10, true));
             }
         }
     
@@ -302,12 +303,18 @@ function animate(fps) {
             enemy.update();
             if (enemy.radius < 3) {
                 if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                    healAudio.play();
-                    spawnPowerUps(enemy);
-                    powerUpDropped = true;
-                    setTimeout(()=>{
-                        powerUpDropped = false;
-                    }, 5000);
+                   // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
+                   let = newPowerUp = spawnPowerUps(enemy);
+                   let indexOfPowerUp = (element) => element === newPowerUp;
+                   // console.log("indexOfPowerUP", indexOfPowerUp);
+                   healAudio.play();
+                   powerUpDropped = true;
+                   setTimeout(()=>{
+                       if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
+                           powerUps.splice(powerUps.findIndex(indexOfPowerUp), 1);
+                       }
+                       powerUpDropped = false;
+                   }, 5000);
                 }
                 enemies.splice(index, 1);
                 score += 50;
@@ -447,12 +454,18 @@ function animate(fps) {
                             color: "yellow"
                         });
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                            spawnPowerUps(enemy);
-                            healAudio.play();
-                            powerUpDropped = true;
-                            setTimeout(()=>{
-                                powerUpDropped = false;
-                            }, 10000);
+                           // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
+                           let = newPowerUp = spawnPowerUps(enemy);
+                           let indexOfPowerUp = (element) => element === newPowerUp;
+                           // console.log("indexOfPowerUP", indexOfPowerUp);
+                           healAudio.play();
+                           powerUpDropped = true;
+                           setTimeout(()=>{
+                               if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
+                                   powerUps.splice(powerUps.findIndex(indexOfPowerUp), 1);
+                               }
+                               powerUpDropped = false;
+                           }, 5000);
                         }
                         explodeAudio.play();
                         enemies.splice(index, 1);
@@ -511,12 +524,18 @@ function animate(fps) {
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
+                            // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
+                            let = newPowerUp = spawnPowerUps(enemy);
+                            let indexOfPowerUp = (element) => element === newPowerUp;
+                            // console.log("indexOfPowerUP", indexOfPowerUp);
                             healAudio.play();
-                            spawnPowerUps(enemy);
                             powerUpDropped = true;
                             setTimeout(()=>{
+                                if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
+                                    powerUps.splice(powerUps.findIndex(indexOfPowerUp), 1);
+                                }
                                 powerUpDropped = false;
-                            }, 10000);
+                            }, 5000);
                         }
                         explodeAudio.play();
                         enemies.splice(index, 1);
@@ -544,12 +563,18 @@ function animate(fps) {
                         score += 10;
                     } else {
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
+                            // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
+                            let = newPowerUp = spawnPowerUps(enemy);
+                            let indexOfPowerUp = (element) => element === newPowerUp;
+                            // console.log("indexOfPowerUP", indexOfPowerUp);
                             healAudio.play();
-                            spawnPowerUps(enemy);
                             powerUpDropped = true;
                             setTimeout(()=>{
+                                if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
+                                    powerUps.splice(powerUps.findIndex(indexOfPowerUp), 1);
+                                }
                                 powerUpDropped = false;
-                            }, 10000);
+                            }, 5000);
                         }
                         deathAudio.play();
                         enemies.splice(index, 1);

@@ -52,9 +52,12 @@ restart.addEventListener("click", ()=>{
 })
 
 // start model
+let audioIntialized = false;
+let mute = false;
 start.addEventListener("click", ()=>{
-    if (!backgroundAudio.playing()) {
+    if (!backgroundAudio.playing() && !audioIntialized) {
         setTimeout(()=>{backgroundAudio.play()}, 1000); 
+        audioIntialized = true;
     }
     init();
     resetTalent();
@@ -76,6 +79,25 @@ start.addEventListener("click", ()=>{
 window.addEventListener('resize', ()=>{
     canvas.width=innerWidth;
     canvas.height=innerHeight;
+})
+
+// volume up
+volumeUp.addEventListener('click', ()=>{
+    if (!mute) {
+        mute = true;
+        backgroundAudio.pause();
+        volumeOff.style.display="block";
+        volumeUp.style.display="none";
+    }
+})
+
+volumeOff.addEventListener('click', ()=> {
+    if (audioIntialized && mute) {
+        mute = false;
+        backgroundAudio.play();
+        volumeOff.style.display="none";
+        volumeUp.style.display="block";
+    }
 })
 
 // player shooting skills
@@ -302,10 +324,18 @@ addEventListener('keydown', function(e) {
                 gamePaused = true;
             }
             break; 
-        case 'Shift':
-            // shiftPressed = true;
-            // console.log("shift is pressed", shiftPressed);
-            // console.log("one");
+        case 'm':
+            if (!mute) {
+                mute = true;
+                backgroundAudio.pause();
+                volumeOff.style.display="block";
+                volumeUp.style.display="none";
+            } else if (audioIntialized && mute) {
+                mute - false;
+                backgroundAudio.play();
+                volumeOff.style.display="none";
+                volumeUp.style.display="block";
+            }
             break;
         case 'Escape': {
             if (!gamePaused) {

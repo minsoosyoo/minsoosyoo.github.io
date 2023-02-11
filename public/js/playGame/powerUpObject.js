@@ -9,7 +9,7 @@ class PowerUpClass {
         {playerPower: {machineGunReload: -1000}, num: 5, message: "machine gun cooldown -1 second"}, 
         {playerPower: {laserBeamDuration: 1000}, num: 5, message: "laser beam lasts +0.5 seconds"}, 
         {playerPower: {laserBeamReload: -3000}, num: 5, message: "laser beam cooldown -5 seconds"},
-        {playerPower: {turretCharge: 3}, num: 100, message: "turret charge +3"},
+        {playerPower: {turretCharge: 3}, num: 10, message: "turret charge +3"},
         {shieldPower: {turretSize: 5}, num: 10, message: "shield turret size increased"},
         {shieldPower: {damage: 2}, num: 5, message: "shield damage +2"}, 
         {shieldPower: {speed: 0.02}, num: 5, message: "shield rotates faster"},
@@ -251,7 +251,7 @@ function choosePowerOne() {
     if (powerUpOne.type === "universal") {
         powerUpObject.universal[powerUpOne.index].num--
         player[`${powerUpOne.firstKey}`][`${powerUpOne.secondKey}`] += powerUpOne.powerValue;
-        if (powerUpTwo.secondKey === "turretCharge") {
+        if (powerUpOne.secondKey === "turretCharge") {
             turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
         }
         if (powerUpObject.universal[powerUpOne.index].num < 1) {
@@ -335,7 +335,7 @@ function choosePowerThree() {
     if (powerUpThree.type === "universal") {
         powerUpObject.universal[powerUpThree.index].num--
         player[`${powerUpThree.firstKey}`][`${powerUpThree.secondKey}`] += powerUpThree.powerValue;
-        if (powerUpOne.secondKey === "turretCharge") {
+        if (powerUpThree.secondKey === "turretCharge") {
             turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
         }
         if (powerUpObject.universal[powerUpThree.index].num < 1) {

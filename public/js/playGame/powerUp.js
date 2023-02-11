@@ -33,6 +33,9 @@ class PowerUp {
 }
 
 function spawnPowerUps(enemy) {
+    if (powerUpObject.universal.length < 1) {
+        return;
+    }
     // if spawn from enemy
     let newPowerUp;
     if (enemy) {

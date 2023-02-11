@@ -32,6 +32,7 @@ const continueBtn = document.querySelector("#continue");
 
 // volume
 const volumeUp = document.querySelector("#volume-up");
+const volumeOff = document.querySelector("#volume-off");
 
 // player power list
 let machineGunText = document.querySelector(".machine-gun");
