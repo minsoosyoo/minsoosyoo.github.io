@@ -21,7 +21,7 @@ class Player {
             laserBeamReload: 30000, // max 15000      
             chargeDuration: 200, // max 5            upgrade -3 (5)
             chargeReload: 40000, // max 15000  
-            turretCharge: 5, // increase turret charge +3     
+            turretCharge: 3, // increase turret charge +3     
             list: ["player-movement", "shots without click"] 
             //player-movement, machine-gun, shot-gun, improved-shot-gun, homing-shots, charge-attack, laser-beam, shots without click
         }; 

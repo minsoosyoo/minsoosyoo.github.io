@@ -19,7 +19,7 @@ const deathAudio = new Howl({
     src: './public/audio/Death.wav',
     volume: 0.5
 })
-const healAudio = new Howl({
+const powerUpDroppedAudio = new Howl({
     src: './public/audio/Heal.wav',
     volume: 0.1
 })

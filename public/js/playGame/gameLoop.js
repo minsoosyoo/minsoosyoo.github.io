@@ -1,6 +1,4 @@
-// end game when conditions met
 function endGame() {
-    console.log("game has ended");
     cancelAnimationFrame(animationId);
     clearInterval(enemyIntervalId);
     clearInterval(machineGunCDId);
@@ -22,7 +20,6 @@ function endGame() {
 
 function continueGame(){
     if (gamePaused) {
-        console.log("game continuing");
         gamePaused = false;
         spawnEnemies(spawnRate);
         animate(fps);
@@ -106,10 +103,9 @@ function animate(fps) {
         }
     
         if (frames > 0 && frames % 10000 === 0 && Math.random() < powerUpDropChance && !powerUpDropped) {
-            console.log("spawning power");
             powerUpDropped = true;
+            powerUpDroppedAudio.play();
             spawnPowerUps();
-            // open power-up selection modal
             setTimeout(()=>{
                 powerUpDropped = false;
             }, 5000);
@@ -189,7 +185,6 @@ function animate(fps) {
         // PLAYER POWER: machine gun
         if (machineGunEnabled && player.playerPower.list.includes("machine-gun")) {
             playerCanFire = false;
-            console.log("machine gun firing");
             
             player.color = "yellow";
     
@@ -207,7 +202,6 @@ function animate(fps) {
         // PLAYER POWER: laser beam
         if (laserBeamEnabled && player.playerPower.list.includes("laser-beam")) {
             playerCanFire = false;
-            console.log("laser beam firing");
             
             player.color = "orange";
             
@@ -303,11 +297,9 @@ function animate(fps) {
             enemy.update();
             if (enemy.radius < 3) {
                 if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                   // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                    let = newPowerUp = spawnPowerUps(enemy);
                    let indexOfPowerUp = (element) => element === newPowerUp;
-                   // console.log("indexOfPowerUP", indexOfPowerUp);
-                   healAudio.play();
+                   powerUpDroppedAudio.play();
                    powerUpDropped = true;
                    setTimeout(()=>{
                        if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
@@ -382,12 +374,9 @@ function animate(fps) {
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                            
-                            // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
-                            // console.log("indexOfPowerUP", indexOfPowerUp);
-                            healAudio.play();
+                            powerUpDroppedAudio.play();
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
@@ -454,11 +443,9 @@ function animate(fps) {
                             color: "yellow"
                         });
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                           // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                            let = newPowerUp = spawnPowerUps(enemy);
                            let indexOfPowerUp = (element) => element === newPowerUp;
-                           // console.log("indexOfPowerUP", indexOfPowerUp);
-                           healAudio.play();
+                           powerUpDroppedAudio.play();
                            powerUpDropped = true;
                            setTimeout(()=>{
                                if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
@@ -524,11 +511,9 @@ function animate(fps) {
                         score += 200;
                         scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                            // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
-                            // console.log("indexOfPowerUP", indexOfPowerUp);
-                            healAudio.play();
+                            powerUpDroppedAudio.play();
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {
@@ -563,11 +548,9 @@ function animate(fps) {
                         score += 10;
                     } else {
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
-                            // let indexOfPowerUp = (element) => element === spawnPowerUps(enemy);
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
-                            // console.log("indexOfPowerUP", indexOfPowerUp);
-                            healAudio.play();
+                            powerUpDroppedAudio.play();
                             powerUpDropped = true;
                             setTimeout(()=>{
                                 if (powerUps[powerUps.findIndex(indexOfPowerUp)]) {

@@ -82,7 +82,6 @@ function powerUpSelection(powerUpObject) {
 
     powerUpChoices = [powerOne, powerTwo, powerThree, powerFour];
     powerUpChoices = powerUpChoices.filter(powerUp => (powerUp !== undefined || powerUp !== null));
-    console.log("power up choices: ", powerUpChoices);
     powerUpChoices = shuffle(powerUpChoices);
     return powerUpChoices;
 }
@@ -375,7 +374,6 @@ function choosePowerThree() {
 
 powerOne.addEventListener("click", ()=>{
     let chosenPower = choosePowerOne();
-    console.log("clicked power", chosenPower);
     if (chosenPower === "machine-gun"){
         machineGunText.style.color = "yellow";
         machineGunCDText.innerHTML = "Ready";
@@ -393,7 +391,6 @@ powerOne.addEventListener("click", ()=>{
 
 powerTwo.addEventListener("click", ()=>{
     let chosenPower = choosePowerTwo();
-    console.log("clicked power", chosenPower);
     if (chosenPower === "machine-gun"){
         machineGunText.style.color = "yellow";
         machineGunCDText.innerHTML = "Ready";
@@ -411,7 +408,6 @@ powerTwo.addEventListener("click", ()=>{
 
 powerThree.addEventListener("click", ()=>{
     let chosenPower = choosePowerThree();
-    console.log("clicked power", chosenPower);
     if (chosenPower === "machine-gun"){
         machineGunText.style.color = "yellow";
         machineGunCDText.innerHTML = "Ready";

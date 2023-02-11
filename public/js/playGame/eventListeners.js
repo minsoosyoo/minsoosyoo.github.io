@@ -237,11 +237,9 @@ addEventListener('keydown', function(e) {
                 player.velocity.y += player.playerPower.movespeed;
             }
             break;
-       
         case '1':
             if (player.playerPower.list.includes("machine-gun") && machineGunUseable && !machineGunEnabled && !machineGunCDStarted && !gamePaused) {
                 machineGunEnabled = true;
-                console.log("machineGunEnabled", machineGunEnabled);
                 machineGunText.style.color = "white";
                 machineGunCDStarted = true;
                 machineGunCD();
@@ -250,7 +248,6 @@ addEventListener('keydown', function(e) {
 
                 setTimeout(()=> {
                     machineGunEnabled = false;
-                    console.log("machineGunEnabled", machineGunEnabled);
                     machineGunUseable = false;
                     if (!playerCanFire) {
                         playerCanFire = true;
@@ -264,7 +261,6 @@ addEventListener('keydown', function(e) {
 
                     player.color = "white";
 
-                    console.log("machine gun has finished firing!");
                 }, player.playerPower.machineGunDuration);   
             }
             break;
@@ -292,13 +288,12 @@ addEventListener('keydown', function(e) {
                     
                     player.color = "white";
 
-                    console.log("laser beam finished");
                 }, player.playerPower.laserBeamDuration);  
 
             }
             break;
         case '3':
-            if (player.shieldPower.list.includes("shield-turret") && !shieldTurretActivated && player.playerPower.turretCharge > 0 && turrets.length <= 10 && !gamePaused) {
+            if (player.shieldPower.list.includes("shield-turret") && !shieldTurretActivated && player.playerPower.turretCharge > 0 && turrets.length < 6 && !gamePaused) {
                 shieldTurretActivated = true;
                 player.playerPower.turretCharge--;
                 turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
@@ -309,7 +304,7 @@ addEventListener('keydown', function(e) {
             }
             break;
         case '4':
-            if (player.autoPower.list.includes("auto-turret") && !autoTurretActivated && player.playerPower.turretCharge > 0 && turrets.length <= 10 && !gamePaused) {
+            if (player.autoPower.list.includes("auto-turret") && !autoTurretActivated && player.playerPower.turretCharge > 0 && turrets.length < 6 && !gamePaused) {
                 autoTurretActivated = true;
                 player.playerPower.turretCharge--;
                 turretsChargeText.innerHTML = `${player.playerPower.turretCharge}`;
@@ -345,12 +340,3 @@ addEventListener('keydown', function(e) {
         }
     }
 })
-
-// addEventListener("keyup", function(e) {
-//     if (e.key === "Shift") {
-//         setTimeout(()=>{
-//             shiftPressed = false;
-//             console.log("shift is not pressed", !shiftPressed);
-//         }, 1000)
-//     }
-// })
