@@ -20,14 +20,11 @@ class Turret {
         if (this.type === "shield" && this.frames % player.shieldPower.reload === 0) {
             spawnShield(this.x, this.y, "shield-stationary");
         } else if (this.type === "auto" && this.frames % player.autoPower.reload === 0) {
-            for (let index=enemies.length-1; index>=0; index--) {
-                const enemy = enemies[index];
                 if (player.autoPower.list.includes("homing-auto")) {
-                    spawnAutoProjectiles(this, enemy, player.autoPower.count, "Homing");
+                    spawnAutoProjectiles(this, player.autoPower.count, "Homing");
                 } else {
-                    spawnAutoProjectiles(this, enemy, player.autoPower.count, "Linear");
+                    spawnAutoProjectiles(this, player.autoPower.count, "Linear");
                 }
-            }
         }
         this.frames++;
     }

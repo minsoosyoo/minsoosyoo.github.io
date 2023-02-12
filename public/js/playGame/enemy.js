@@ -40,7 +40,7 @@ class Enemy {
         }
         // homing
         else if (this.type === 'Homing') {
-            const angle = Math.atan2(player.y-this.y, player.x-this.x);
+            let angle = Math.atan2(player.y-this.y, player.x-this.x);
             this.velocity.x = Math.cos(angle);
             this.velocity.y = Math.sin(angle);
 
@@ -51,7 +51,7 @@ class Enemy {
         else if (this.type === 'Homing Spinning') {
             this.radians += 0.1;
 
-            const angle = Math.atan2(player.y-this.center.y, player.x-this.center.x);
+            let angle = Math.atan2(player.y-this.center.y, player.x-this.center.x);
             this.velocity.x = Math.cos(angle);
             this.velocity.y = Math.sin(angle);
 
@@ -68,7 +68,7 @@ class Enemy {
                 this.speed+=0.05;
             }
             this.color = "#800000";
-            const angle = Math.atan2(player.y-this.y, player.x-this.x);
+            let angle = Math.atan2(player.y-this.y, player.x-this.x);
             this.velocity.x = Math.cos(angle);
             this.velocity.y = Math.sin(angle);
             this.x = this.x + this.velocity.x * this.speed;

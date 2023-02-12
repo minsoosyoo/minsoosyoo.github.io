@@ -41,15 +41,15 @@ class Projectile {
 }
 
 // auto projectiles that shoot from player
-function spawnAutoProjectiles(start, end, shots, type) {
-    if (autoProjectiles.length >= shots) {
-        return;
-    }
-    const angle = Math.atan2(end.y - start.y, end.x - start.x);
-    const velocity = {
-        x: Math.cos(angle),
-        y: Math.sin(angle)
-    }
-    autoProjectiles.push(new Projectile(start.x, start.y, player.autoPower.size, 'yellow', velocity, type, end, player.autoPower.damage, player.autoPower.speed));
+function spawnAutoProjectiles(start, shots, type) {
+    for (let index=enemies.length-1; index>=enemies.length - 1 - shots; index--) {
+        const enemy = enemies[index];
+        const angle = Math.atan2(enemy.y - start.y, enemy.x - start.x);
+        const velocity = {
+            x: Math.cos(angle),
+            y: Math.sin(angle)
+        }
+        autoProjectiles.push(new Projectile(start.x, start.y, player.autoPower.size, 'yellow', velocity, type, enemy, player.autoPower.damage, player.autoPower.speed));
+    }    
 }
 

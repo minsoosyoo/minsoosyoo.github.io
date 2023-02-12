@@ -290,6 +290,15 @@ function animate(fps) {
             laserAudio.play();
             spawnShield(player.x, player.y,"shield-center");
         }
+
+        // UPDATE: fire auto projectiles
+        if (player.autoPower.list.includes("auto-missiles") && frames % player.autoPower.reload === 0) {
+            shootAudio.play();
+            spawnAutoProjectiles(player, player.autoPower.count, "Linear");
+        } else if (player.autoPower.list.includes("homing-auto") && frames % player.autoPower.reload === 0) {
+            shootAudio.play();
+            spawnAutoProjectiles(player, player.autoPower.count, "Homing");
+        }
     
         // enemies randomly spawn on the edges of the screen
         for (let index=enemies.length-1; index>=0; index--) {
@@ -346,6 +355,7 @@ function animate(fps) {
                             projectile.didDamage = true;
                         }, 1500);
                         score += 100;
+                        scoreText.innerHTML = score;
                         createScoreLabel({
                             position: {
                                 x: projectile.x,
@@ -354,7 +364,6 @@ function animate(fps) {
                             score: 100,
                             color: "white"
                             });
-                        scoreText.innerHTML = score;
                         gsap.to(enemy, {
                             radius: enemy.radius - projectile.damage
                         })
@@ -363,6 +372,8 @@ function animate(fps) {
                         }
                     } else {
                         // increase score
+                        score += 200;
+                        scoreText.innerHTML = score;
                         createScoreLabel({
                             position: {
                                 x: projectile.x,
@@ -371,8 +382,6 @@ function animate(fps) {
                             score: 200,
                             color: "yellow"
                         });
-                        score += 200;
-                        scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
@@ -394,15 +403,6 @@ function animate(fps) {
                 }
             }
     
-            // fire auto projectiles
-            if (player.autoPower.list.includes("auto-missiles") && frames % player.autoPower.reload === 0) {
-                shootAudio.play();
-                spawnAutoProjectiles(player, enemy, player.autoPower.count, "Linear");
-            } else if (player.autoPower.list.includes("homing-auto") && frames % player.autoPower.reload === 0) {
-                shootAudio.play();
-                spawnAutoProjectiles(player, enemy, player.autoPower.count, "Homing");
-            }
-    
             for (let pIndex=autoProjectiles.length-1; pIndex>=0; pIndex--) {
                 const projectile = autoProjectiles[pIndex];
                 const dist = Math.hypot(projectile.x-enemy.x, projectile.y-enemy.y);
@@ -416,6 +416,8 @@ function animate(fps) {
                     if (enemy.radius - projectile.damage > 5) {
                         // increase score
                         damageTakenAudio.play();
+                        score += 100;
+                        scoreText.innerHTML = score;
                         createScoreLabel({
                             position: {
                                 x: projectile.x,
@@ -424,8 +426,6 @@ function animate(fps) {
                             score: 100,
                             color: "white"
                         });
-                        score += 100;
-                        scoreText.innerHTML = score;
                         gsap.to(enemy, {
                             radius: enemy.radius - projectile.damage
                         })
@@ -483,6 +483,8 @@ function animate(fps) {
                         if (shield.shieldCharges <= 1) {
                             shields.splice(sIndex, 1);
                         }
+                        score += 100;
+                        scoreText.innerHTML = score;
                         createScoreLabel({
                             position: {
                                 x: shield.x,
@@ -491,8 +493,6 @@ function animate(fps) {
                             score: 100,
                             color: "white"
                         });
-                        score += 100;
-                        scoreText.innerHTML = score;
                         gsap.to(enemy, {
                             radius: enemy.radius - shield.damage
                         })
@@ -500,6 +500,8 @@ function animate(fps) {
                         if (shield.shieldCharges <= 1) {
                             shields.splice(sIndex, 1);
                         }
+                        score += 200;
+                        scoreText.innerHTML = score;
                         createScoreLabel({
                             position: {
                                 x: shield.x,
@@ -508,8 +510,6 @@ function animate(fps) {
                             score: 200,
                             color: "yellow"
                         });
-                        score += 200;
-                        scoreText.innerHTML = score;
                         if (Math.random() < powerUpDropChance && !powerUpDropped) {
                             let = newPowerUp = spawnPowerUps(enemy);
                             let indexOfPowerUp = (element) => element === newPowerUp;
