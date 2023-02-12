@@ -289,7 +289,6 @@ addEventListener('keydown', function(e) {
                     player.color = "white";
 
                 }, player.playerPower.laserBeamDuration);  
-
             }
             break;
         case '3':
