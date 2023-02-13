@@ -54,5 +54,7 @@ class Shield {
 // shield projectile around player
 function spawnShield(x, y, type) {
     const radians = 0;
-    shields.push(new Shield(x, y, player.shieldPower.size, 'blue', radians, player.shieldPower.radianFactor, type, player.shieldPower.damage, player.shieldPower.speed, player.shieldPower.shieldCharges));
+    if (shields.length <= 10) {
+        shields.push(new Shield(x, y, player.shieldPower.size, 'blue', radians, player.shieldPower.radianFactor, type, player.shieldPower.damage, player.shieldPower.speed, player.shieldPower.shieldCharges));
+    }
 }
