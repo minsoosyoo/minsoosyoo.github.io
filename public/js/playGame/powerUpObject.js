@@ -14,7 +14,7 @@ class PowerUpClass {
         {shieldPower: {damage: 2}, num: 5, message: "shield damage +2"}, 
         {shieldPower: {speed: 0.02}, num: 5, message: "shield rotates faster"},
         {shieldPower: {size: 2}, num: 5, message: "shield size increased"},
-        {shieldPower: {reload: -100}, num: 5, message: "shield spawns faster"},
+        {shieldPower: {reload: -50}, num: 5, message: "shield spawns faster"},
         {shieldPower: {radianFactor: -20}, num: 5, message: "shield rotation is tighter"},
         {shieldPower: {shieldCharges: 1}, num: 5, message: "shield can hit +1 time extra"},
         {autoPower: {turretSize: 5}, num: 5, message: "auto turret size increased"},
